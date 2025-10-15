@@ -309,31 +309,31 @@ URI: /members/{memberld}
 
 HTTP Method: POST
 
-URI: /items
+URI: /products
 
 2. 상품 목록 조회
 
 HTTP Method: GET
 
-URI: /items
+URI: /products
 
 3. 개별 상품 정보 상세 조회
 
 HTTP Method: GET
 
-URI: /items/{itemId}
+URI: /products/{productId}
 
 4. 상품 정보 수정
 
 HTTP Method: PATCH
 
-URI: /items/{itemId}
+URI: /products/{productId}
 
 5. 상품 삭제
 
 HTTP Method: PATCH
 
-URI: /items/{itemId}
+URI: /products/{productId}
 
 (상품 판매 상태 변경, 만약 DELETE를 할 경우 추후 이전 주문 조회를 할 때 문제가 생길 수 있음)
 
