@@ -210,3 +210,33 @@ Spring에서는 **셋 다 실행 되거나 셋 다 실행이 안 되거나** 둘
 1. 필요한 의존성을 final 키워드를 사용해 추가
 2. @RequiredArgsConstructor를 사용해 생성자를 추가한다
 
+
+---
+
+### java 구문 추가 정리
+
+1. **ResponseEntity.created(URI.create("/orders" + orderId))**
+- HTTP 상태 코드: 201 Created를 설정함(자원이 성공적으로 생성되었음을 의미)
+- 헤더 설정: 응답 헤더에 Location 필드를 추가하고, 생성된 자원의 URI("/orders" + orderId)를 값으로 설정함
+
+2. **.build()**
+- ResponseEntity 객체를 최종적으로 완성하여 반환하는 역할
+- 응답 본문(Body)이 없을 때(Void) 사용됨
+
+3. **.ok()**
+- HTTP 상태 코드를 200 OK(요청이 성공적으로 처리됨)로 설정함
+- 괄호 안에 전달된 객체를 **응답 본문(Body)** 에 담는 역할
+- *@RestController* 에 의해 Spring은 이 order 객체를 **JSON 또는 XML 형식으로 자동 변환(직렬화)** 하여 클라이언트에게 전송
+
+4. **@RequestBody**
+- *요청 본문 데이터 수신:*
+클라이언트가 POST나 PATCH 요청을 보낼 때, 주문 생성에 필요한 데이터(예: 상품 목록, 수량, 배송지 주소 등)는 요청 본문(Body)에 JSON이나 XML 형태로 담겨 서버로 전송됨.
+- @RequestBody는 Spring에게 "이 메서드의 인자는 HTTP 요청 본문에 있는 데이터를 사용해야 한다"고 지시함
+
+- *자동 객체 변환 (역직렬화):* 
+Spring은 OrderCreateRequest와 같은 자바 객체를 인자로 받으면, HTTP Message Converter (주로 Jackson 라이브러리를 사용하여 JSON 처리)를 내부적으로 호출함
+- 이 컨버터는 요청 본문에 있는 JSON 문자열을 읽어, 그 필드 이름과 일치하는 속성을 가진 새로운 OrderCreateRequest 자바 객체 인스턴스를 생성하고 값을 채워 넣음. 이 과정을 **역직렬화(Deserialization)** 라고 함
+
+
+- 개발자는 request.getDeliveryAddress()나 request.getItems()와 같이 자바 객체 메서드를 사용하여 데이터를 편리하게 접근하고 비즈니스 로직에 사용할 수 있게 됨
+- 수동으로 JSON 파싱 코드를 작성해야 하는 번거로움을 없애주고, 코드를 간결하게 만들어 줌
