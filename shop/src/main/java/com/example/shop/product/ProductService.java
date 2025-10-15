@@ -15,7 +15,7 @@ public class ProductService {
 
     // 새로운 상품 등록
     public Long createProduct(ProductCreateRequest request) {
-        Product existingProduct = productRepository.findByProductId(request);
+        Product existingProduct = productRepository.findByProductId(request.getProductId()); //TODO 구현 없이 선언부만 작성해둠
         if(existingProduct != null) {
             throw new RuntimeException("이미 존재하는 상품입니다: " + request.getProductId());
         }
@@ -27,17 +27,17 @@ public class ProductService {
             request.getStatus()
         );
 
-        productRepository.save(product);
+        productRepository.save(product); //TODO 구현 없이 선언부만 작성해둠
 
         return product.getId();
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return productRepository.findAll(); //TODO 구현 없이 선언부만 작성해둠
     }
 
     public Product getProductById(Long id) {
-        Product product = productRepository.findById(id);
+        Product product = productRepository.findByProductId(id);
 
         if(product == null) {
             throw new RuntimeException("상품을 찾을 수 없습니다");
@@ -47,7 +47,7 @@ public class ProductService {
 
     // 상품 정보 수정
     public void updateProduct(Long id, ProductUpdateRequest request) {
-        Product product = productRepository.findById(id);
+        Product product = productRepository.findByProductId(id);
 
         if(product == null) {
             throw new RuntimeException("상품을 찾을 수 없습니다.");
@@ -58,12 +58,12 @@ public class ProductService {
 
 
     public void deleteProduct(Long id) {
-        Product product = productRepository.findById(id);
+        Product product = productRepository.findByProductId(id);
 
         if(product == null) {
             throw new RuntimeException("상품을 찾을 수 없습니다.");
         }
 
-        productRepository.deleteById(id);
+        productRepository.deleteByProductId(id); //TODO 구현 없이 선언부만 작성해둠
     }
 }
