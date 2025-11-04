@@ -14,7 +14,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    //@Transactional
+    @Transactional
     public Long createMember(MemberCreateRequest request) {
         Member existingMember = memberRepository.findByLoginId(request.getLoginId());
         if(existingMember != null) {
@@ -33,12 +33,12 @@ public class MemberService {
         return member.getId(); // id를 넘겨줘야 컨트롤러 createMember의 리턴에서 멤버 아이디가 포함된 엔드포인트를 제대로 넘겨줄 수 있음
     }
 
-    //@Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<Member> getAllMembers() {
         return memberRepository.findAll();
     }
 
-    //@Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public Member getMemberById(Long id) {
         Member member = memberRepository.findById(id);
         // 이때 잘못된 id가 들어올 수 있기 때문에 분기 처리가 필요

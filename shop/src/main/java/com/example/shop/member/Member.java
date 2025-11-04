@@ -1,20 +1,27 @@
 package com.example.shop.member;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 /**
  * Member 도메인 클래스
  * - 온라인 쇼핑몰의 회원 정보를 담는 엔티티
  * - 아직 JPA를 배우지 않았으므로 순수 자바 클래스로 작성
  */
+
+@Entity
 @Getter
-@Setter
 @NoArgsConstructor
 public class Member {
 
     // 회원 고유 식별자
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // 회원 아이디

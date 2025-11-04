@@ -23,7 +23,7 @@ public class OrderService {
           request.getStatus()
         );
 
-        orderRepository.save(order); //TODO 구현 없이 선언부만 작성해둠
+        orderRepository.save(order);
 
         return order.getOrderId();
     }
@@ -35,7 +35,7 @@ public class OrderService {
 
 
     public Order getOrderByOrderId(Long orderId) {
-        Order order = orderRepository.findByOrderId(orderId); //TODO 구현 없이 선언부만 작성해둠
+        Order order = orderRepository.findByOrderId(orderId);
         if(order == null) {
             throw new RuntimeException("주문번호가 올바르지 않습니다.");
         }
