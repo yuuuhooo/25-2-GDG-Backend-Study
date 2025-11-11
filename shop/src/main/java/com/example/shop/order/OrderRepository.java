@@ -28,4 +28,9 @@ public class OrderRepository {
     public void save(Order order) {
         em.persist(order);
     }
+
+
+    public void cancel(Long orderId) {
+
+    }
 }

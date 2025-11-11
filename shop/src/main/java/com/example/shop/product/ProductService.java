@@ -4,6 +4,7 @@ import com.example.shop.product.dto.ProductCreateRequest;
 import com.example.shop.product.dto.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,15 +15,17 @@ public class ProductService {
 
 
     // 새로운 상품 등록
+    @Transactional
     public Long createProduct(ProductCreateRequest request) {
-        Product existingProduct = productRepository.findByProductId(request.getProductId()); //TODO 구현 없이 선언부만 작성해둠
+        Product existingProduct = productRepository.findByProductCode(request.getProductCode()); //TODO 구현 없이 선언부만 작성해둠
         if(existingProduct != null) {
-            throw new RuntimeException("이미 존재하는 상품입니다: " + request.getProductId());
+            throw new RuntimeException("이미 존재하는 상품입니다: " + request.getProductCode());
         }
 
         Product product = new Product(
-            request.getProductId(),
+            request.getProductCode(),
             request.getProductName(),
+            request.getStock(),
             request.getPrice(),
             request.getStatus()
         );
@@ -32,12 +35,14 @@ public class ProductService {
         return product.getId();
     }
 
+    @Transactional
     public List<Product> getAllProducts() {
         return productRepository.findAll(); //TODO 구현 없이 선언부만 작성해둠
     }
 
-    public Product getProductById(Long id) {
-        Product product = productRepository.findByProductId(id);
+    @Transactional
+    public Product getProductByCode(String productCode) {
+        Product product = productRepository.findByProductCode(productCode);
 
         if(product == null) {
             throw new RuntimeException("상품을 찾을 수 없습니다");
@@ -46,24 +51,26 @@ public class ProductService {
     }
 
     // 상품 정보 수정
-    public void updateProduct(Long id, ProductUpdateRequest request) {
-        Product product = productRepository.findByProductId(id);
+    @Transactional
+    public void updateProduct(String productCode, ProductUpdateRequest request) {
+        Product product = productRepository.findByProductCode(productCode);
 
         if(product == null) {
             throw new RuntimeException("상품을 찾을 수 없습니다.");
         }
 
-        product.updateInfo(request.getProductName(), request.getPrice(), request.getStatus);
+        product.updateInfo(request.getProductName(), request.getPrice(), request.getStatus());
     }
 
 
-    public void deleteProduct(Long id) {
-        Product product = productRepository.findByProductId(id);
+    @Transactional
+    public void deleteProduct(String productCode) {
+        Product product = productRepository.findByProductCode(productCode);
 
         if(product == null) {
             throw new RuntimeException("상품을 찾을 수 없습니다.");
         }
 
-        productRepository.deleteByProductId(id); //TODO 구현 없이 선언부만 작성해둠
+        productRepository.deleteByProductCode(productCode); //TODO 구현 없이 선언부만 작성해둠
     }
 }

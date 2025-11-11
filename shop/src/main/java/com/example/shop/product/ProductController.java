@@ -29,23 +29,23 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @GetMapping("/{productId}") // 개별 상품 정보 상세 조회
-    public ResponseEntity<Product> getProduct(@PathVariable Long productId) {
-        Product product = productService.getProductById(productId);
+    @GetMapping("/{productCode}") // 개별 상품 정보 상세 조회
+    public ResponseEntity<Product> getProduct(@PathVariable String productCode) {
+        Product product = productService.getProductByCode(productCode);
         return ResponseEntity.ok(product);
     }
 
-    @PatchMapping("/{productId}") // 상품 정보 수정
+    @PatchMapping("/{productCode}") // 상품 정보 수정
     public ResponseEntity<Void> updateProduct(
-            @PathVariable Long productId,
+            @PathVariable String productCode,
             @RequestBody ProductUpdateRequest request) {
-        productService.updateProduct(productId, request);
+        productService.updateProduct(productCode, request);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{productId}") // 잘못 등록한 상품 삭제
-    public ResponseEntity<Void> deleteProduct(@PathVariable Long productId) {
-        productService.deleteProduct(productId);
+    @DeleteMapping("/{productCode}") // 잘못 등록한 상품 삭제
+    public ResponseEntity<Void> deleteProduct(@PathVariable String productCode) {
+        productService.deleteProduct(productCode);
         return ResponseEntity.noContent().build();
     }
 }

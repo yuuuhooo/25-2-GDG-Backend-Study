@@ -1,42 +1,41 @@
 package com.example.shop.member;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
-/**
- * Member 도메인 클래스
- * - 온라인 쇼핑몰의 회원 정보를 담는 엔티티
- * - 아직 JPA를 배우지 않았으므로 순수 자바 클래스로 작성
- */
 
 @Entity
+@Table(name = "members")
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //JPA만 사용 가능, 외부 사용 차단
 public class Member {
 
     // 회원 고유 식별자
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //키값 결정을 DB에게 위임. 1234 순으로 자동 증가
+    @Column(name = "member_id")
     private Long id;
 
     // 회원 아이디
+    @Column(name = "member_login_id")
     private String loginId;
 
     // 비밀번호
+    @Column(name = "member_pw")
     private String password;
 
     // 전화번호
+    @Column(name = "member_phone")
     private String phoneNumber;
 
     // 주소
+    @Column(name = "member_address")
     private String address;
 
     // 적립금
+    @Column(name = "member_point")
     private int point;
 
     /**
