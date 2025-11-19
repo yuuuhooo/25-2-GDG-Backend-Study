@@ -19,7 +19,7 @@ public class OrderRepository {
     
     public List<Order> findByMemberId(Long memberId) {
         List<Order> result = em.createQuery(
-                "SELECT o FROM Order o WHERE o.memberId = :memberId", Order.class
+                "SELECT o FROM Order o WHERE o.id = :memberId", Order.class
         ).setParameter("memberId", memberId).getResultList();
 
         return result;
@@ -27,10 +27,5 @@ public class OrderRepository {
 
     public void save(Order order) {
         em.persist(order);
-    }
-
-
-    public void cancel(Long orderId) {
-
     }
 }

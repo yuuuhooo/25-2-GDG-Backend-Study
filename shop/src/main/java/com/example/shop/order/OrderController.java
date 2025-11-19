@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping("/members/{memberId}/orders")
 public class OrderController {
     private final OrderService orderService;
-    private final ProductService productService;
 
     //Order 구조: orderId, memberId(주문자), status(주문 상태; 주문 완료, 주문 취소, 배송 중 등)
 
