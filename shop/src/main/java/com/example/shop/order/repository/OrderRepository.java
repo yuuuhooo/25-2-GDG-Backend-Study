@@ -1,6 +1,6 @@
 package com.example.shop.order.repository;
 
-import com.example.shop.order.Order;
+import com.example.shop.order.entity.Order;
 
 import java.util.List;
 import java.util.Optional;

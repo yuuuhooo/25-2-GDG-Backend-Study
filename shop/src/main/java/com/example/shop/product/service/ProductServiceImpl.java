@@ -1,5 +1,6 @@
-package com.example.shop.product;
+package com.example.shop.product.service;
 
+import com.example.shop.product.entity.Product;
 import com.example.shop.product.dto.ProductCreateRequest;
 import com.example.shop.product.dto.ProductUpdateRequest;
 import com.example.shop.product.repository.ProductRepository;
@@ -11,10 +12,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductService {
+
+public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
-
+    @Override
     // 새로운 상품 등록
     @Transactional
     public Long createProduct(ProductCreateRequest request) {
@@ -35,20 +37,22 @@ public class ProductService {
         return product.getId();
     }
 
+    @Override
     // 상품 목록 조회
     @Transactional(readOnly = true)
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
+    @Override
     // 개별 상품 정보 상세 조회
     @Transactional(readOnly = true)
     public Product getProductByCode(String productCode) {
-        // Optional을 사용하여 조회하고, 없으면 예외 처리
         return productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다: " + productCode));
     }
 
+    @Override
     // 상품 정보 수정
     @Transactional
     public void updateProduct(String productCode, ProductUpdateRequest request) {
@@ -58,12 +62,12 @@ public class ProductService {
         product.updateInfo(request.getProductName(), request.getPrice(), request.getStatus());
     }
 
-
-    // 💡 상품 판매 중지
+    @Override
     @Transactional
     public void deleteProduct(String productCode) {
         Product product = productRepository.findByProductCode(productCode)
                 .orElseThrow(() -> new RuntimeException("상품을 찾을 수 없습니다."));
+
         product.discontinue();
     }
 }

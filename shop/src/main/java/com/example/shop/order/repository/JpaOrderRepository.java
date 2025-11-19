@@ -1,7 +1,6 @@
 package com.example.shop.order.repository;
 
-import com.example.shop.order.Order;
-import com.example.shop.order.repository.OrderRepository;
+import com.example.shop.order.entity.Order;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;

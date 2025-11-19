@@ -1,8 +1,9 @@
-package com.example.shop.order;
+package com.example.shop.order.controller;
 
 
 import com.example.shop.order.dto.OrderCreateRequest;
-import com.example.shop.product.ProductService;
+import com.example.shop.order.entity.Order;
+import com.example.shop.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
