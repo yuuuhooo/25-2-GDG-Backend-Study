@@ -51,4 +51,7 @@ public class Product {
         }
     }
 
+    public void discontinue() {
+        this.status = "판매 중지";
+    }
 }
