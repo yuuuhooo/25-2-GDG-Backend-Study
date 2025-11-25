@@ -43,6 +43,7 @@ public class Member {
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.address = address;
+
     }
 
     public void setId(Long id) {
