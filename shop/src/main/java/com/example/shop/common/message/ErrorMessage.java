@@ -7,4 +7,7 @@ public class ErrorMessage {
 
     public static final String LOGIN_ID_NOT_NULL = "로그인 아이디는 필수입니다.";
     public static final String LOGIN_ID_SIZE = "로그인 아이디는 4자 이상 20자 이하입니다.";
+
+    public static final String PRODUCTCODE_NOT_NULL = "제품코드는 필수입니다.";
+
 }

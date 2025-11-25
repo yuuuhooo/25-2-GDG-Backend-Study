@@ -4,6 +4,7 @@ import com.example.shop.product.dto.ProductCreateRequest;
 import com.example.shop.product.dto.ProductUpdateRequest;
 import com.example.shop.product.entity.Product;
 import com.example.shop.product.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ProductController {
     //Product 구조: productId, productName, price, status(판매 상태)
 
     @PostMapping // 상품 정보 등록
-    public ResponseEntity<Void> createProduct(@RequestBody ProductCreateRequest request) {
+    public ResponseEntity<Void> createProduct(@RequestBody @Valid ProductCreateRequest request) {
         Long productId = productService.createProduct(request);
         return ResponseEntity.created(URI.create("/products" + productId)).build();
     }

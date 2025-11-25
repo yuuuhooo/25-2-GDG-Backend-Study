@@ -1,5 +1,6 @@
 package com.example.shop.product.service;
 
+import com.example.shop.common.exception.BadRequestException;
 import com.example.shop.product.entity.Product;
 import com.example.shop.product.dto.ProductCreateRequest;
 import com.example.shop.product.dto.ProductUpdateRequest;
@@ -21,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Long createProduct(ProductCreateRequest request) {
         if(productRepository.findByProductCode(request.getProductCode()).isPresent()) {
-            throw new RuntimeException("이미 존재하는 상품입니다: " + request.getProductCode());
+            throw new BadRequestException("이미 존재하는 상품입니다: " + request.getProductCode());
         }
 
         Product product = new Product(
