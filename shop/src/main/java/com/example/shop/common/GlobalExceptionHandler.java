@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-
-    //400
+    //400 유효하지 않은 요청
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         // 첫번째 에러메시지를 추출하려고 get(0) 사용
@@ -23,21 +22,21 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-    //400
+    //400 잘못된 요청
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException e) {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         return ResponseEntity.badRequest().body(errorResponse);
     }
 
-    //404
+    //404 Not Found
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException e) {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
-    //500
+    //500 서버 내부 오류
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ErrorResponse> handleUnknownException(Exception e) {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());

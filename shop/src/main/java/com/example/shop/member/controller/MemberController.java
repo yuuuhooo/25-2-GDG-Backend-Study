@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController // 위의 두 어노테이션이 포함되어 있음
 @RequiredArgsConstructor // 생성자를 만들어주는 어노테이션.
-// *final**로 선언된 모든 필드와 @NonNull 어노테이션이 붙은 모든 필드를 매개변수로 받는 생성자를 코드를 직접 작성하지 않아도 자동으로 만들어 줌
+// final로 선언된 모든 필드와 @NonNull 어노테이션이 붙은 모든 필드를 매개변수로 받는 생성자를 코드를 직접 작성하지 않아도 자동으로 만들어 줌
 @RequestMapping("/members") // 공통 엔드포인트 여기에 한 번만 작성
 @Tag(name = "회원 관리", description = "회원 CRUD API")
 public class MemberController {
@@ -33,36 +33,39 @@ public class MemberController {
     @ApiResponse(responseCode = "400", description = "잘못된 요청(유효성 검사 실패 혹은 중복된 로그인 아이디)")
     public ResponseEntity<Void> createMember(@RequestBody @Valid MemberCreateRequest request) {
         Long memberId = memberService.createMember(request);
-        return ResponseEntity.created(URI.create("/members" + memberId)).build();
+        return ResponseEntity.created(URI.create("/members" + memberId)).build(); // 201 created
     }
 
     @GetMapping
+    @Operation(summary = "회원 리스트 조회", description = "전체 회원을 조회합니다.")
     public ResponseEntity<List<Member>> getAllMembers() {
         List<Member> members = memberService.getAllMembers();
-        return ResponseEntity.ok(members); // ok() 안에 넣어주면 그대로 리스폰스 바디에 들어감
+        return ResponseEntity.ok(members); // 200 ok
+        // ok() 안에 넣어주면 그대로 response body에 들어감
     }
 
     @GetMapping("/{memberId}") // PathVa
+    @Operation(summary = "특정 회원 조회", description = "특정 회원 정보를 조회합니다.")
     public ResponseEntity<Member> getMember(@PathVariable Long memberId) {
         Member member = memberService.getMemberById(memberId);
-        return ResponseEntity.ok(member);
+        return ResponseEntity.ok(member); // 200 ok
     }
 
     @PatchMapping("/{memberId}")
+    @Operation(summary = "회원 정보 수정", description = "회원 정보를 수정합니다.")
     public ResponseEntity<Void> updateMember(
             @PathVariable Long memberId,
-            @RequestBody @Valid MemberUpdateRequest request) {
+            @RequestBody @Valid MemberUpdateRequest request) { // 유효성 검사
         memberService.updateMember(memberId, request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build(); // 200 ok
     }
 
     @DeleteMapping("/{memberId}")
+    @Operation(summary = "회원 삭제", description = "회원 정보를 삭제합니다.")
     public ResponseEntity<Void> deleteMember(@PathVariable Long memberId) {
         memberService.deleteMember(memberId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.noContent().build(); // 201 no content
     }
-
-
 
 }
 

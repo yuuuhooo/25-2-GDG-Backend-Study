@@ -14,16 +14,16 @@ public class MemberCreateRequest {
     @Size(min = 4, max = 20, message = ErrorMessage.LOGIN_ID_SIZE)
     private String loginId;
 
-    @NotNull(message = "비밀번호는 필수입니다.")
-    @Size(min = 8, max = 20, message="비밀번호는 8자 이상 20자 이하여야 합니다.")
+    @NotNull(message = ErrorMessage.PASSWORD_NOT_NULL)
+    @Size(min = 8, max = 20, message = ErrorMessage.PASSWORD_SIZE)
     private String password;
 
-    @NotNull(message = "전화번호는 필수입니다.")
-    @Pattern(regexp = "^010-\\d{4}-\\d{4}$", message = "전화번호 형식은 010-xxxx-xxxx입니다.")
+    @NotNull(message = ErrorMessage.PHONENUMBER_NOT_NULL)
+    @Pattern(regexp = "^010-\\d{4}-\\d{4}$", message = ErrorMessage.PHONENUMBER_FORM)
     private String phoneNumber;
 
-    @NotNull(message = "주소는 필수입니다.")
-    @Size(min=1, max=255, message = "주소는 1자 이상 255자 이하입니다.")
+    @NotNull(message = ErrorMessage.ADDRESS_NOT_NULL)
+    @Size(min=1, max=255, message = ErrorMessage.ADDRESS_SIZE)
     private String address;
 
 

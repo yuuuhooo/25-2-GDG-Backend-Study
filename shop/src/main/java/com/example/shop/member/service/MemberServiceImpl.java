@@ -10,11 +10,8 @@ import com.example.shop.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
-import static com.example.shop.common.message.ErrorMessage.MEMBER_ALREADY_EXISTS;
-import static com.example.shop.common.message.ErrorMessage.MEMBER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
