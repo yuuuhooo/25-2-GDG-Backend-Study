@@ -1,5 +1,6 @@
 package com.example.shop.common.message;
 
+// TODO
 public class ErrorMessage {
 
     //
@@ -28,9 +29,9 @@ public class ErrorMessage {
     public static final String PRODUCTCODE_SIZE = "제품코드는 N자 이하입니다.";
 
 
-    public static final String
-    public static final String
-    public static final String
-    public static final String
+//    public static final String
+//    public static final String
+//    public static final String
+//    public static final String
 
 }

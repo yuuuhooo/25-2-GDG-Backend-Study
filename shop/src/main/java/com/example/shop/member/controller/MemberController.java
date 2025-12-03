@@ -44,7 +44,7 @@ public class MemberController {
         // ok() 안에 넣어주면 그대로 response body에 들어감
     }
 
-    @GetMapping("/{memberId}") // PathVa
+    @GetMapping("/{memberId}")
     @Operation(summary = "특정 회원 조회", description = "특정 회원 정보를 조회합니다.")
     public ResponseEntity<Member> getMember(@PathVariable Long memberId) {
         Member member = memberService.getMemberById(memberId);
